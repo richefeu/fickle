@@ -507,8 +507,8 @@ void PBC::accelerations() {
 
       // real relative velocities
       vec2r vel = Particles[j].vel - Particles[i].vel;
-      double dn = len - Particles[i].radius - Particles[j].radius;
       vec2r realVel = Cell.h * vel + Cell.vh * sij;
+      double dn = len - Particles[i].radius - Particles[j].radius;
       double Bi = Particles[i].radius + 0.5 * dn;
       double Bj = Particles[j].radius + 0.5 * dn;
 
@@ -540,6 +540,9 @@ void PBC::accelerations() {
       Sigxy += f.x * branch.y;
       Sigyx += f.y * branch.x;
       Sigyy += f.y * branch.y;
+    } else {
+      Interactions[k].fn = 0.0;
+      Interactions[k].ft = 0.0;
     }
   }  // Loop over interactions
 
